@@ -1,20 +1,25 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::view('/', 'welcome');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::view('dashboard', 'dashboard')->name('dashboard');
+
+    Route::prefix('cash-flow')->group(function () {
+        Route::view('entries', 'entries')->name('entries');
+    });
+
+    Route::prefix('settings')->group(function () {
+        Route::view('entry-types', 'entry-types')->name('entry-types');
+    });
+
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
 
 require __DIR__.'/auth.php';

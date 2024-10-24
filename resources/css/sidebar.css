@@ -1,0 +1,41 @@
+body {
+    font-family: "Lato", sans-serif;
+  }
+
+  #sidebar {
+    width: 65px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+    overflow-x: hidden;
+    white-space: nowrap;
+  }
+
+  main #sidebar {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    margin-left: 50px;
+  }
+
+  .material-icons,
+  .icon-text {
+    vertical-align: middle;
+  }
+
+  #main {
+    padding: 16px;
+    margin-left: 65px;
+    transition: margin-left 0.5s;
+  }
+
+  @media screen and (max-height: 450px) {
+    #sidebar {
+      padding-top: 15px;
+    }
+    /* #sidebar a {
+      font-size: 18px;
+    } */
+  }
