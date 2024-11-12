@@ -3,14 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
-class StoreEntryRequest extends FormRequest
+
+class StoreOutflowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +31,7 @@ class StoreEntryRequest extends FormRequest
             'amount' => floatval($this->amount),
         ]);
     }
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -39,11 +40,10 @@ class StoreEntryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:50'],
-            'description' => ['string', 'max: 100', 'nullable'],
-            'amount' => ['required', 'numeric'],
-            'entry_type' => ['required', 'exists:entry_types,id'],
-            'entry_date' => ['required', 'date'],
+            'title' => 'required|string|max:50',
+            'description' => 'string|max: 100|nullable',
+            'amount' => 'required|numeric',
+            'date' => 'required|date',
         ];
     }
 
@@ -55,9 +55,8 @@ class StoreEntryRequest extends FormRequest
             'description.max' => 'A Descricao deve ter no maximo 100 caracteres.',
             'amount.required' => 'O Valor deve ser informado.',
             'amount.numeric' => 'O Valor deve ser um valor numerico.',
-            'entry_type.required' => 'O Tipo de Entrada deve ser informado.',
-            'entry_date.required' => 'A Data deve ser informada.',
-            'entry_date.date' => 'A Data deve ser uma data.',
+            'date.required' => 'A Data deve ser informada.',
+            'date.date' => 'A Data deve ser uma data.',
         ];
     }
 

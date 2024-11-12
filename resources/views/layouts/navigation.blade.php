@@ -8,6 +8,7 @@
                 <x-sidebar.item title="Dashboard" href="{{ route('dashboard') }}" icon="dashboard"/>
                 <x-sidebar.dropdown dropdownId="dropdown-cash-flow" dropdownTitle="Fluxo de Caixa" icon="monetization_on">
                     <x-sidebar.dropdown-item title="Entradas" href="{{ route('entries') }}" icon="attach_money"/>
+                    <x-sidebar.dropdown-item title="Saídas" href="{{ route('outflows') }}" icon="attach_money"/>
                 </x-sidebar.dropdown>
                 <x-sidebar.dropdown dropdownId="dropdown-settings" dropdownTitle="Configurações" icon="settings">
                     <x-sidebar.dropdown-item title="Tipos de Entrada" href="{{ route('entry-types') }}" icon="attach_money"/>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\EntryTypeController;
+use App\Http\Controllers\OutflowController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(
@@ -24,6 +25,11 @@ Route::middleware(['auth'])->group(
             Route::post('entries', [EntryController::class, 'store'])->name('entries.store');
             Route::post('entries/{id}', [EntryController::class, 'update'])->name('entries.update');
             Route::delete('entries/{id}', [EntryController::class, 'destroy'])->name('entries.destroy');
+
+            Route::get('outflows', [OutflowController::class, 'index'])->name('outflows');
+            Route::post('outflows', [OutflowController::class, 'store'])->name('outflows.store');
+            Route::post('outflows/{id}', [OutflowController::class, 'update'])->name('outflows.update');
+            Route::delete('outflows/{id}', [OutflowController::class, 'destroy'])->name('outflows.destroy');
         });
     }
 

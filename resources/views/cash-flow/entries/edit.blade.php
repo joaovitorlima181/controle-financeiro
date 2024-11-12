@@ -11,7 +11,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Nova Entrada de Caixa
+                    Editar Entrada de Caixa
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -37,14 +37,14 @@
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="amount"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Preço</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor</label>
                         <input type="decimal" name="amount" id="amount"
                             class="form-control @error('amount') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="R$100" required="required" value="{{ $entry->amount }}">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="entry_date"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Preço</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data</label>
                         <input type="date" name="entry_date" id="entry_date"
                             class="form-control @error('entry_date') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             required="required" value="{{ $entry->entry_date }}">

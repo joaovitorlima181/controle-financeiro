@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Entry extends Model
+class Outflow extends Model
 {
     protected $fillable = [
         'title',
         'description',
         'amount',
-        'entry_date',
-        'entry_type_id',
+        'date',
     ];
 
     public function getAmountAttribute($value)
