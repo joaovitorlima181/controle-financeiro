@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tipos de Entrada') }}
+            {{ __('Entradas de Caixa') }}
         </h2>
     </x-slot>
 
@@ -22,12 +22,26 @@
         @error('description')
             <x-toast id="description-invalid" type="error" message="{{ $message }}" />
         @enderror
+
+        @error('amount')
+            <x-toast id="amount-invalid" type="error" message="{{ $message }}" />
+        @enderror
+
+        @error('date')
+            <x-toast id="date-invalid" type="error" message="{{ $message }}" />
+        @enderror
+
+        @error('entryType')
+            <x-toast id="type-invalid" type="error" message="{{ $message }}" />
+        @enderror
+
+
         <div class="mx-auto sm:px-6 lg:px-8">
 
             <div class="flex flex-wrap flex-row-reverse">
-                <button type="button" data-modal-target="add-entry-type-modal" data-modal-toggle="add-entry-type-modal"
+                <button type="button" data-modal-target="create-entry" data-modal-toggle="create-entry"
                     class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                    Novo tipo de Entrada
+                    Nova Entrada de Caixa
                 </button>
             </div>
 
@@ -39,40 +53,61 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
+                                        Entrada
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Valor
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Tipo de Entrada
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Descrição
+                                        Data
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        <span class="sr-only">Editar</span>
+                                        <span class="sr-only">Editar/Deletar</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($entryTypes) > 0)
-                                    @foreach ($entryTypes as $entryType)
+                                @if (count($entries) > 0)
+                                    @foreach ($entries as $entry)
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $entryType->name }}
+                                                {{ $entry->title }}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{ $entryType->description }}
+                                                R${{ $entry->amount }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $entry->entry_type_name }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ date('d/m/Y', strtotime($entry->entry_date)); }}
                                             </td>
                                             <td class="px-6 py-4 text-right">
                                                 <button type="button"
-                                                    data-modal-target="delete-modal-{{ $entryType->id }}"
-                                                    data-modal-toggle="delete-modal-{{ $entryType->id }}"
-                                                    class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                                                    class="text-white font-medium rounded-lg text-sm text-center me-2 mb-2"
+                                                    data-modal-target="edit-entry-modal-{{ $entry->id }}"
+                                                    data-modal-toggle="edit-entry-modal-{{ $entry->id }}">
+                                                    <i class="material-icons">
+                                                        edit
+                                                    </i>
+                                                </button>
+                                                <button type="button"
+                                                    class="text-white font-medium rounded-lg text-sm text-center me-2 mb-2"
+                                                    data-modal-target="delete-entry-modal-{{ $entry->id }}"
+                                                    data-modal-toggle="delete-entry-modal-{{ $entry->id }}">
                                                     <i class="material-icons">
                                                         delete
                                                     </i>
                                                 </button>
                                             </td>
-                                            @include('settings.entry-types.delete', ['id' => $entryType->id])
                                         </tr>
+                                        @include('cash-flow.entries.delete', ['id' => $entry->id])
+                                        @include('cash-flow.entries.edit', ['id' => $entry->id])
                                     @endforeach
                                 @else
                                 @endif
@@ -85,7 +120,7 @@
                 </div>
             </div>
 
-            @include('settings.entry-types.create')
+            @include('cash-flow.entries.create')
 
         </div>
     </div>
