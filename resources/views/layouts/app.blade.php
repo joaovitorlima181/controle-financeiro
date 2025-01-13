@@ -14,6 +14,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script>
+
     </head>
     <body class="font-sans antialiased">
         <div id="main" class="min-h-screen bg-gray-100 dark:bg-gray-900">

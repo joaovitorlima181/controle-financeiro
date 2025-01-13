@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\EntryTypeController;
 use App\Http\Controllers\OutflowController;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(
     function () {
 
-        Route::view('dashboard', 'dashboard')->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::prefix('cash-flow')->group(function () {
             Route::view('entries', 'entries')->name('entries');

@@ -14,13 +14,9 @@ class Entry extends Model
         'entry_type_id',
     ];
 
-    public function getAmountAttribute($value)
-    {
-        return number_format($value, 2, ',', '.');
-    }
-
     public function entryType()
     {
         return $this->belongsTo(EntryType::class);
     }
+    
 }
